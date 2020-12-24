@@ -21,5 +21,9 @@ namespace EmploymentWebApp.Models
         {
             return _employeeList.FirstOrDefault(delegate (Employee emp) {return emp.Id==id;});
         }
+        public IEnumerable<Employee> GetAllEmployees()
+        {
+            return _employeeList;
+        }
     }
 }
