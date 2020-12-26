@@ -6,7 +6,11 @@ namespace EmploymentWebApp.Models
 {
     public interface IEmployeeRepository
     {
-        Employee GetEmployee(int id);
         IEnumerable<Employee> GetAllEmployees();
+        // CRUD
+        Employee GetEmployee(int id);
+        int AddEmployee(Employee employee);
+        Employee UpdateEmployee(Employee updatedEmployee);
+        void DeleteEmployee(int id);
     }
 }
