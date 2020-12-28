@@ -40,12 +40,12 @@ namespace EmploymentWebApp.Models
 
         public void DeleteEmployee(int id)
         {
-            Employee emp = _context.Employees.Find(id);
-            if(emp != null)
+            Employee employee = GetEmployee(id);
+            if(employee != null)
             {
-                _context.Employees.Remove(emp);
+                _context.Employees.Remove(employee);
                 _context.SaveChanges();
-            }    
+            }
         }
     }
 }

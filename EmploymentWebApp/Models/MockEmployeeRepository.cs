@@ -43,10 +43,10 @@ namespace EmploymentWebApp.Models
         }
         public void DeleteEmployee(int id)
         {
-            Employee emp = _employeeList.FirstOrDefault(e => e.Id == id);
-            if(emp != null)
+            Employee employee = GetEmployee(id);
+            if(employee != null)
             {
-                _employeeList.Remove(emp);
+                _employeeList.Remove(employee);
             }
         }
     }
