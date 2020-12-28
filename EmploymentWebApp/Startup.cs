@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Mvc;
 using EmploymentWebApp.Models;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
+using System.Text.Json.Serialization;
 
 namespace EmploymentWebApp
 {
@@ -29,8 +31,15 @@ namespace EmploymentWebApp
         {
             services.AddDbContextPool<AppDbContext>(
                 options => options.UseSqlServer(_config.GetConnectionString("EmployeeDBConnection")));
-            services.AddMvc(delegate(MvcOptions options) {options.EnableEndpointRouting=false;})
-                    .AddXmlSerializerFormatters();
+            services.AddMvc(options => options.EnableEndpointRouting = false)
+                    .AddXmlSerializerFormatters()
+                    .AddJsonOptions(options =>
+                    {
+                        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                        options.JsonSerializerOptions.IgnoreNullValues = true;
+                    });
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddControllers();
             services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
         }
 
